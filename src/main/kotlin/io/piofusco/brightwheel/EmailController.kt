@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/email")
 class EmailController(
-    val emailService: EmailService
+    val sendGridService: SendGridService
 ) {
     @PostMapping
     fun sendEmail(@RequestBody email: EmailDTO): ResponseEntity<EmailDTO> {
-        emailService.send(email)
+        sendGridService.send(email)
         return ResponseEntity(HttpStatus.CREATED)
     }
 }

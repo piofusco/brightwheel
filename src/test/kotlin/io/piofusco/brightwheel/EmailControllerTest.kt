@@ -24,14 +24,14 @@ class EmailControllerTest {
     @TestConfiguration
     class ControllerTestConfig {
         @Bean
-        fun mockEmailService() = mockk<EmailService>(relaxed = true)
+        fun mockEmailService() = mockk<SendGridService>(relaxed = true)
     }
 
     @Autowired
     lateinit var objectMapper: ObjectMapper
 
     @Autowired
-    lateinit var mockEmailService: EmailService
+    lateinit var mockSendGridService: SendGridService
 
     @Autowired
     lateinit var subject: EmailController
@@ -64,6 +64,6 @@ class EmailControllerTest {
         )
             .andExpect(MockMvcResultMatchers.status().isCreated)
 
-        verify { mockEmailService.send(emailToPost) }
+        verify { mockSendGridService.send(emailToPost) }
     }
 }
